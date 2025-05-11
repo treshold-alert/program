@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TransactionController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,11 @@ use App\Http\Controllers\TransactionController;
 
 // Route::put('/products/{id}/update-stock', [ProductController::class, 'updateStock'])->name('products.updateStock');
 // Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-Route::get('/', [ProductController::class, 'viewProduct'])->name('products.view');
 
+Route::get('/', function () {
+    $products = Product::all();
+    return view('welcome', compact('products'));
+})->name('home');
 
 
 Route::get('/dashboard', function () {
@@ -36,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/products', [ProductController::class, 'viewProduct'])->name('products.view');
     Route::post('/products/add', [ProductController::class, 'addProduct'])->name('products.add');
     Route::put('/products/{id}', [ProductController::class, 'editProduct'])->name('products.update');
     Route::delete('/products/{id}', [ProductController::class, 'deleteProduct'])->name('products.destroy');
