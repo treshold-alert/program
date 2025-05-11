@@ -301,6 +301,21 @@
         });
     </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tambahkan event listener untuk semua elemen dengan class 'open-modal'
+            document.querySelectorAll('.open-modal').forEach(function(element) {
+                element.addEventListener('click', function() {
+                    // Ambil data-photo dari elemen yang diklik
+                    const photo = this.getAttribute('data-photo');
+                    // Set src dari img di dalam modal dengan foto yang diambil
+                    document.getElementById('modalPhoto').setAttribute('src', photo);
+                    // Tampilkan modal
+                    $('#photoModal').modal('show');
+                });
+            });
+        });
+    </script>
 
 
 </body>

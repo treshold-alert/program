@@ -35,6 +35,14 @@
             </a>
         </li>
 
+        <!-- Back to Page -->
+        <li class="menu-item {{ request()->routeIs('home') ? 'active' : '' }}">
+            <a href="{{ route('home') }}" class="menu-link ">
+                <i class="menu-icon tf-icons mdi mdi-flip-to-front"></i>
+                <div data-i18n="Layouts">Home</div>
+            </a>
+        </li>
+
         <li class="menu-item {{ request()->routeIs('transactions.view') ? 'active' : '' }}">
             @auth
                 <a href="{{ route('transactions.view') }}" class="menu-link">
