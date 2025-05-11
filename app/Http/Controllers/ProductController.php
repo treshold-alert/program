@@ -153,8 +153,15 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Stok tidak mencukupi untuk pengurangan.');
         }
 
+        // Kurangi stok
         $product->stock -= $request->quantity;
         $product->save();
+
+        // Kirim notifikasi jika stok tinggal sedikit
+        if ($product->stock <= 9) {
+            $message = "⚠️ *Stok Barang Hampir Habis!* ⚠️\n\nNama: *{$product->name}*\nSisa Stok: *{$product->stock} unit*\n\nSegera restock!";
+            TwilioHelper::sendWhatsAppMessage(env('ADMIN_PHONE'), $message);
+        }
 
         // Buat transaksi
         Transaction::create([
@@ -172,6 +179,7 @@ class ProductController extends Controller
             'details' => "Mengurangi stok produk {$product->name} sebanyak {$request->quantity}",
         ]);
 
+        // ⬅️ Return di akhir setelah semua proses selesai
         return redirect()->back()->with('success', 'Stok berhasil dikurangi.');
     }
 }

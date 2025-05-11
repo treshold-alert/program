@@ -1,7 +1,7 @@
 <!-- Stock OUT Modal -->
 <div class="modal fade" id="stockOutModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="POST" action="{{ route('products.stock.out') }}">
+        <form method="POST" action="{{ route('products.stock.out') }}" id="stockOutForm">
             @csrf
             <input type="hidden" name="product_id" id="stockOutProductId">
             <div class="modal-content">

@@ -21,19 +21,9 @@ use App\Http\Controllers\TransactionController;
 //     return view('welcome');
 // });
 
-Route::put('/products/{id}/update-stock', [ProductController::class, 'updateStock'])->name('products.updateStock');
-Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+// Route::put('/products/{id}/update-stock', [ProductController::class, 'updateStock'])->name('products.updateStock');
+// Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::get('/', [ProductController::class, 'viewProduct'])->name('products.view');
-Route::post('/products/add', [ProductController::class, 'addProduct'])->name('products.add');
-Route::put('/products/{id}', [ProductController::class, 'editProduct'])->name('products.update');
-Route::delete('/products/{id}', [ProductController::class, 'deleteProduct'])->name('products.destroy');
-Route::post('/products/stock-in', [ProductController::class, 'stockIn'])->name('products.stock-in');
-Route::post('/products/stock-out', [ProductController::class, 'stockOut'])->name('products.stock.out');
-
-
-Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.view');
-
-Route::get('/log', [LogController::class, 'showLog'])->name('log.view');
 
 
 
@@ -45,6 +35,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::post('/products/add', [ProductController::class, 'addProduct'])->name('products.add');
+    Route::put('/products/{id}', [ProductController::class, 'editProduct'])->name('products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'deleteProduct'])->name('products.destroy');
+    Route::post('/products/stock-in', [ProductController::class, 'stockIn'])->name('products.stock-in');
+    Route::post('/products/stock-out', [ProductController::class, 'stockOut'])->name('products.stock.out');
+
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.view');
+
+    Route::get('/log', [LogController::class, 'showLog'])->name('log.view');
 });
 
 Route::get('/page', function () {

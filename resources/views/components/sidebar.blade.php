@@ -14,10 +14,17 @@
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
         <li class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-            <a href="{{ route('dashboard') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
-                <div data-i18n="Dashboards">Dashboards</div>
-            </a>
+            @auth
+                <a href="{{ route('dashboard') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
+                    <div data-i18n="Dashboards">Dashboards</div>
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
+                    <div data-i18n="Dashboards">Dashboards</div>
+                </a>
+            @endauth
         </li>
 
         <!-- Products -->
@@ -29,31 +36,46 @@
         </li>
 
         <li class="menu-item {{ request()->routeIs('transactions.view') ? 'active' : '' }}">
-            <a href="{{ route('transactions.view') }}" class="menu-link">
-                <i class="menu-icon tf-icons mdi mdi-credit-card-outline"></i>
-                <div data-i18n="Front Pages">Transactions</div>
-            </a>
+            @auth
+                <a href="{{ route('transactions.view') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-credit-card-outline"></i>
+                    <div data-i18n="Front Pages">Transactions</div>
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-credit-card-outline"></i>
+                    <div data-i18n="Front Pages">Transactions</div>
+                </a>
+            @endauth
         </li>
-        
+
         <li class="menu-item {{ request()->routeIs('log.view') ? 'active' : '' }}">
-            <a href="{{ route('log.view') }}" class="menu-link ">
-                <i class="menu-icon tf-icons mdi mdi-folder-outline"></i>
-                <div data-i18n="Layouts">Logs</div>
-            </a>
+            @auth
+                <a href="{{ route('log.view') }}" class="menu-link ">
+                    <i class="menu-icon tf-icons mdi mdi-folder-outline"></i>
+                    <div data-i18n="Layouts">Logs</div>
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="menu-link ">
+                    <i class="menu-icon tf-icons mdi mdi-folder-outline"></i>
+                    <div data-i18n="Layouts">Logs</div>
+                </a>
+            @endauth
         </li>
 
+        @auth
+            <li class="menu-item">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="menu-link border-transparent bg-transparent">
+                        <!-- Unique Logout Icon -->
+                        <i class="menu-icon tf-icons mdi mdi-logout"></i>
+                        <div data-i18n="Front Pages">Logout</div>
+                    </button>
+                </form>
 
-        <li class="menu-item">
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="menu-link border-transparent bg-transparent">
-                    <!-- Unique Logout Icon -->
-                    <i class="menu-icon tf-icons mdi mdi-logout"></i>
-                    <div data-i18n="Front Pages">Logout</div>
-                </button>
-            </form>
-
-        </li>
+            </li>
+        @endauth
     </ul>
 
 </aside>

@@ -271,6 +271,7 @@
     </script>
 
     <script>
+        // Buka modal dan isi data
         $(document).on('click', '.stock-out-product', function() {
             let id = $(this).data('id');
             let name = $(this).data('name');
@@ -279,7 +280,27 @@
             $('#stockOutProductName').text('Produk: ' + name);
             $('#stockOutModal').modal('show');
         });
+
+        // Konfirmasi SweetAlert saat submit Stock OUT
+        $('#stockOutForm').on('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Stok akan dikurangi.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Kurangi!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
     </script>
+
 
 
 </body>
