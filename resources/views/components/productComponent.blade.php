@@ -97,7 +97,7 @@
                                     data-photo="{{ asset('storage/' . $product->image) }}">
                                     <i class="menu-icon tf-icons mdi mdi-image"></i>
                                 </a> --}}
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="photo"
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}"
                                     style="width: 60px; height: 60px; object-fit: cover;" />
                             @else
                                 <span class="text-muted">No Photo</span>
