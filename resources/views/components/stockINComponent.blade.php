@@ -10,9 +10,10 @@
                 <input type="hidden" name="product_id" id="stockProductId">
                 <p>Menambahkan stok untuk: <strong id="stockProductName"></strong> (<span id="stockProductCode"></span>)
                 </p>
-                <div class="form-floating">
-                    <input type="number" name="stock" class="form-control" id="stockAmount" min="1" required>
-                    <label for="stockAmount">Jumlah yang ditambahkan</label>
+                <div class="form-floating form-floating-outline">
+                    <input type="text" id="stock" class="form-control" placeholder="20" name="stock"
+                        oninput="validateNumberInput(this)" required />
+                    <label for="stock">Jumlah yang ditambahkan</label>
                 </div>
             </div>
             <div class="modal-footer">
@@ -22,4 +23,3 @@
         </form>
     </div>
 </div>
-

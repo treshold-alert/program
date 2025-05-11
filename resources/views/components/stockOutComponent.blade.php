@@ -11,9 +11,10 @@
                 </div>
                 <div class="modal-body">
                     <p id="stockOutProductName" class="fw-bold mb-2"></p>
-                    <div class="form-group">
-                        <label for="quantity_out">Jumlah yang keluar</label>
-                        <input type="number" name="quantity" class="form-control" required min="1">
+                    <div class="form-floating form-floating-outline">
+                        <input type="text" id="quantity" class="form-control" placeholder="20" name="quantity"
+                            oninput="validateNumberInput(this)" required />
+                        <label for="quantity">Jumlah yang keluar</label>
                     </div>
                 </div>
                 <div class="modal-footer">
