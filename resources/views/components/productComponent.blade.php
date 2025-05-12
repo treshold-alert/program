@@ -113,29 +113,31 @@
                                     data-bs-toggle="dropdown">
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </button>
-                                <div class="dropdown-menu">
-                                    <a href="javascript:void(0);" class="dropdown-item edit-product"
-                                        data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
-                                        data-code="{{ $product->code }}" data-image="{{ $product->image }}">
-                                        <i class="mdi mdi-pencil-outline me-1"></i> Edit
-                                    </a>
-                                    <a href="javascript:void(0);" class="dropdown-item delete-product"
-                                        data-id="{{ $product->product_id }}" data-name="{{ $product->name }}">
-                                        <i class="mdi mdi-delete-outline me-1"></i> Delete
-                                    </a>
+                                <div class="position-relative">
+                                    <div class="dropdown-menu" style="z-index: 1000 !important;">
+                                        <a href="javascript:void(0);" class="dropdown-item edit-product"
+                                            data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
+                                            data-code="{{ $product->code }}" data-image="{{ $product->image }}">
+                                            <i class="mdi mdi-pencil-outline me-1"></i> Edit
+                                        </a>
+                                        <a href="javascript:void(0);" class="dropdown-item delete-product"
+                                            data-id="{{ $product->product_id }}" data-name="{{ $product->name }}">
+                                            <i class="mdi mdi-delete-outline me-1"></i> Delete
+                                        </a>
 
-                                    <a href="javascript:void(0);" class="dropdown-item stock-product"
-                                        data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
-                                        data-code="{{ $product->code }}" data-image="{{ $product->image }}">
-                                        <i class="mdi mdi-tray-arrow-down me-1"></i> Stock IN
-                                    </a>
+                                        <a href="javascript:void(0);" class="dropdown-item stock-product"
+                                            data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
+                                            data-code="{{ $product->code }}" data-image="{{ $product->image }}">
+                                            <i class="mdi mdi-tray-arrow-down me-1"></i> Stock IN
+                                        </a>
 
-                                    <a href="javascript:void(0);" class="dropdown-item stock-out-product"
-                                        data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
-                                        data-code="{{ $product->code }}" data-image="{{ $product->image }}">
-                                        <i class="mdi mdi-tray-arrow-up me-1"></i> Stock OUT
-                                    </a>
+                                        <a href="javascript:void(0);" class="dropdown-item stock-out-product"
+                                            data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
+                                            data-code="{{ $product->code }}" data-image="{{ $product->image }}">
+                                            <i class="mdi mdi-tray-arrow-up me-1"></i> Stock OUT
+                                        </a>
 
+                                    </div>
                                 </div>
                             </div>
                         </td>
