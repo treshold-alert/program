@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.view');
     Route::get('/average', [TransactionController::class, 'stockSummary'])->name('average.view');
+    Route::get('/products/average/pdf', [TransactionController::class, 'downloadAveragePDF'])->name('products.average.pdf');
+
 
 
     Route::get('/log', [LogController::class, 'showLog'])->name('log.view');

@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransactionController extends Controller
 {
@@ -79,5 +80,60 @@ class TransactionController extends Controller
 
 
         return view('admin.average', compact('topPrediction', 'report'));
+    }
+
+    public function downloadAveragePDF()
+    {
+        $products = Product::all();
+
+        $report = $products->map(function ($product) {
+            $masuk = Transaction::where('product_id', $product->product_id)
+                ->where('type', 'masuk')
+                ->sum('quantity');
+
+            $keluar = Transaction::where('product_id', $product->product_id)
+                ->where('type', 'keluar')
+                ->sum('quantity');
+
+            return [
+                'code' => $product->code,
+                'name' => $product->name,
+                'masuk' => $masuk,
+                'keluar' => $keluar,
+                'stock' => $product->stock
+            ];
+        });
+
+        // Ambil prediksi barang keluar terbanyak
+        $weeklyOutData = Transaction::select(
+            DB::raw('YEARWEEK(created_at) as week'),
+            'product_id',
+            DB::raw('SUM(quantity) as total_out')
+        )
+            ->where('type', 'keluar')
+            ->groupBy('week', 'product_id')
+            ->get()
+            ->groupBy('product_id');
+
+        $predictions = [];
+
+        foreach ($weeklyOutData as $productId => $weeks) {
+            $quantities = $weeks->pluck('total_out')->toArray();
+            if (count($quantities) >= 1) {
+                $movingAvg = round(array_sum($quantities) / count($quantities));
+                $product = Product::find($productId);
+                $predictions[] = [
+                    'product_id' => $productId,
+                    'name' => $product->name,
+                    'predicted_stock' => $movingAvg,
+                    'total_keluar' => array_sum($quantities)
+                ];
+            }
+        }
+
+        $topPrediction = collect($predictions)->sortByDesc('total_keluar')->first();
+
+        $pdf = PDF::loadView('admin.laporanPDF', compact('report', 'topPrediction'))->setPaper('A4', 'portrait');
+        return $pdf->download('laporan-barang.pdf');
     }
 }

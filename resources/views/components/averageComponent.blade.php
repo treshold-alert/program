@@ -11,9 +11,9 @@
                             <i class="mdi mdi-dots-vertical mdi-24px"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Update</a>
+                            <a class="dropdown-item" href="{{ route('products.average.pdf') }}"> 🖨️ Cetak PDF</a>
+                            {{-- <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Update</a> --}}
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
             </div>
             <div class="card-body">
                 <div class="row g-3">
-                    <div class="col-md-6 col-6">
+                    {{-- <div class="col-md-6 col-6">
                         <div class="d-flex align-items-center">
                             <div class="avatar">
                                 <div class="avatar-initial bg-warning rounded shadow">
@@ -37,7 +37,7 @@
                                 <h5 class="mb-0">{{ $topPrediction['total_keluar'] }}</h5>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-6 col-6">
                         <div class="d-flex align-items-center">
                             <div class="avatar">
