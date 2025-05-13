@@ -12,7 +12,7 @@
 
 <div class="card">
     <h5 class="card-header">Product List</h5>
-    <div class="table-responsive text-nowrap" style="overflow: visible !important;">
+    <div class="table-responsive text-nowrap">
         <table class="table">
             <thead>
                 <tr class="text-nowrap">
