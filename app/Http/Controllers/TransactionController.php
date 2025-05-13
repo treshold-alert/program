@@ -7,6 +7,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -16,83 +17,126 @@ class TransactionController extends Controller
         return view('admin.transaction', compact('transactions'));
     }
 
-    public function stockSummary()
+    public function stockSummary(Request $request)
     {
-        // Ambil data transaksi keluar per minggu per produk
-        $weeklyOutData = Transaction::select(
-            DB::raw('YEARWEEK(created_at) as week'),
-            'product_id',
-            DB::raw('SUM(quantity) as total_out')
-        )
-            ->where('type', 'keluar')
-            ->groupBy('week', 'product_id')
-            ->get()
-            ->groupBy('product_id');
+        $bulan = $request->bulan;
+        $report = collect();
+        $predictions = collect();
+        $topPrediction = null;
 
-        // dd($weeklyOutData);
-        $predictions = [];
+        if ($bulan) {
+            $start = Carbon::parse($bulan)->startOfMonth();
+            $end = Carbon::parse($bulan)->endOfMonth();
 
-        foreach ($weeklyOutData as $productId => $weeks) {
-            $quantities = $weeks->pluck('total_out')->toArray();
+            // Moving average prediksi mingguan tapi dibatasi bulan
+            $weeklyOutData = Transaction::select(
+                DB::raw('YEARWEEK(created_at) as week'),
+                'product_id',
+                DB::raw('SUM(quantity) as total_out')
+            )
+                ->where('type', 'keluar')
+                ->whereBetween('created_at', [$start, $end])
+                ->groupBy('week', 'product_id')
+                ->get()
+                ->groupBy('product_id');
 
-            // Hitung moving average (pakai semua minggu yang tersedia)
-            if (count($quantities) >= 1) {
-                $movingAvg = round(array_sum($quantities) / count($quantities));
+            foreach ($weeklyOutData as $productId => $weeks) {
+                $quantities = $weeks->pluck('total_out')->toArray();
 
-                $product = Product::find($productId);
-                $predictions[] = [
-                    'product_id' => $productId,
-                    'name' => $product->name,
-                    'predicted_stock' => $movingAvg,
-                    'total_keluar' => array_sum($quantities)
-                ];
+                if (count($quantities) >= 1) {
+                    $movingAvg = round(array_sum($quantities) / count($quantities));
+                    $product = Product::find($productId);
+                    $predictions->push([
+                        'product_id' => $productId,
+                        'name' => $product->name,
+                        'predicted_stock' => $movingAvg,
+                        'total_keluar' => array_sum($quantities)
+                    ]);
+                }
             }
+
+            $topPrediction = $predictions->sortByDesc('total_keluar')->first();
+
+            $products = Product::all();
+
+            $report = $products->map(function ($product) use ($start, $end) {
+                $masuk = Transaction::where('product_id', $product->product_id)
+                    ->where('type', 'masuk')
+                    ->whereBetween('created_at', [$start, $end])
+                    ->sum('quantity');
+
+                $keluar = Transaction::where('product_id', $product->product_id)
+                    ->where('type', 'keluar')
+                    ->whereBetween('created_at', [$start, $end])
+                    ->sum('quantity');
+
+                return [
+                    'code' => $product->code,
+                    'name' => $product->name,
+                    'masuk' => $masuk,
+                    'keluar' => $keluar,
+                    'stock' => $product->stock
+                ];
+            });
         }
 
-        // Ambil produk dengan jumlah keluar paling banyak
-        $topPrediction = collect($predictions)
-            ->sortByDesc('total_keluar')
-            ->first();
-
-        // Ambil data produk + perhitungan masuk dan keluar
-        $products = Product::all();
-
-        $report = $products->map(function ($product) {
-            $masuk = Transaction::where('product_id', $product->product_id)
-                ->where('type', 'masuk')
-                ->sum('quantity');
-
-            $keluar = Transaction::where('product_id', $product->product_id)
-                ->where('type', 'keluar')
-                ->sum('quantity');
-
-            return [
-                'code' => $product->code,
-                'name' => $product->name,
-                'masuk' => $masuk,
-                'keluar' => $keluar,
-                'stock' => $product->stock
-            ];
-        });
-
-        // dd($predictions);
-        // dd($weeklyOutData);
-
-
-        return view('admin.average', compact('topPrediction', 'report'));
+        return view('admin.average', compact('report', 'topPrediction', 'bulan'));
     }
 
-    public function downloadAveragePDF()
+    public function downloadAveragePDF(Request $request)
     {
+        $bulan = $request->bulan;
+
+        if (!$bulan) {
+            return back()->with('error', 'Bulan harus dipilih untuk mencetak PDF.');
+        }
+
+        $start = Carbon::parse($bulan)->startOfMonth();
+        $end = Carbon::parse($bulan)->endOfMonth();
+
+        // Data transaksi keluar mingguan
+        $weeklyOutData = Transaction::select(
+            DB::raw('YEARWEEK(created_at) as week'),
+            'product_id',
+            DB::raw('SUM(quantity) as total_out')
+        )
+            ->where('type', 'keluar')
+            ->whereBetween('created_at', [$start, $end])
+            ->groupBy('week', 'product_id')
+            ->get()
+            ->groupBy('product_id');
+
+        $predictions = collect();
+
+        foreach ($weeklyOutData as $productId => $weeks) {
+            $quantities = $weeks->pluck('total_out')->toArray();
+
+            if (count($quantities) >= 1) {
+                $movingAvg = round(array_sum($quantities) / count($quantities));
+                $product = Product::find($productId);
+                $predictions->push([
+                    'product_id' => $productId,
+                    'name' => $product->name,
+                    'predicted_stock' => $movingAvg,
+                    'total_keluar' => array_sum($quantities)
+                ]);
+            }
+        }
+
+        $topPrediction = $predictions->sortByDesc('total_keluar')->first();
+
+        // Laporan stok
         $products = Product::all();
 
-        $report = $products->map(function ($product) {
+        $report = $products->map(function ($product) use ($start, $end) {
             $masuk = Transaction::where('product_id', $product->product_id)
                 ->where('type', 'masuk')
+                ->whereBetween('created_at', [$start, $end])
                 ->sum('quantity');
 
             $keluar = Transaction::where('product_id', $product->product_id)
                 ->where('type', 'keluar')
+                ->whereBetween('created_at', [$start, $end])
                 ->sum('quantity');
 
             return [
@@ -104,36 +148,44 @@ class TransactionController extends Controller
             ];
         });
 
-        // Ambil prediksi barang keluar terbanyak
-        $weeklyOutData = Transaction::select(
-            DB::raw('YEARWEEK(created_at) as week'),
-            'product_id',
-            DB::raw('SUM(quantity) as total_out')
-        )
-            ->where('type', 'keluar')
-            ->groupBy('week', 'product_id')
-            ->get()
-            ->groupBy('product_id');
+        $pdf = PDF::loadView('admin.laporanPDF', compact('report', 'topPrediction', 'bulan'))->setPaper('A4', 'portrait');
 
-        $predictions = [];
+        return $pdf->download('laporan-barang-' . $bulan . '.pdf');
+    }
 
-        foreach ($weeklyOutData as $productId => $weeks) {
-            $quantities = $weeks->pluck('total_out')->toArray();
-            if (count($quantities) >= 1) {
-                $movingAvg = round(array_sum($quantities) / count($quantities));
-                $product = Product::find($productId);
-                $predictions[] = [
-                    'product_id' => $productId,
+
+    public function laporan(Request $request)
+    {
+        $bulan = $request->bulan;
+
+        $report = collect();
+        if ($bulan) {
+            $start = Carbon::parse($bulan)->startOfMonth();
+            $end = Carbon::parse($bulan)->endOfMonth();
+
+            $products = Product::all();
+
+            $report = $products->map(function ($product) use ($start, $end) {
+                $masuk = Transaction::where('product_id', $product->product_id)
+                    ->where('type', 'masuk')
+                    ->whereBetween('created_at', [$start, $end])
+                    ->sum('quantity');
+
+                $keluar = Transaction::where('product_id', $product->product_id)
+                    ->where('type', 'keluar')
+                    ->whereBetween('created_at', [$start, $end])
+                    ->sum('quantity');
+
+                return [
+                    'code' => $product->code,
                     'name' => $product->name,
-                    'predicted_stock' => $movingAvg,
-                    'total_keluar' => array_sum($quantities)
+                    'masuk' => $masuk,
+                    'keluar' => $keluar,
+                    'stock' => $product->stock
                 ];
-            }
+            });
         }
 
-        $topPrediction = collect($predictions)->sortByDesc('total_keluar')->first();
-
-        $pdf = PDF::loadView('admin.laporanPDF', compact('report', 'topPrediction'))->setPaper('A4', 'portrait');
-        return $pdf->download('laporan-barang.pdf');
+        return view('admin.average  ', compact('report', 'bulan'));
     }
 }

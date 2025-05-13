@@ -45,6 +45,9 @@
 
 <body>
     <h2 class="title">Laporan Barang</h2>
+    @if ($bulan)
+        <p><strong>Bulan:</strong> {{ \Carbon\Carbon::parse($bulan)->translatedFormat('F Y') }}</p>
+    @endif
 
     @if ($topPrediction)
         <div class="section">
