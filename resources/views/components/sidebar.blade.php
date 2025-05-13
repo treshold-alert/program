@@ -57,6 +57,20 @@
             @endauth
         </li>
 
+        <li class="menu-item {{ request()->routeIs('average.view') ? 'active' : '' }}">
+            @auth
+                <a href="{{ route('average.view') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-chart-line"></i>
+                    <div data-i18n="Front Pages">Moving Average</div>
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="menu-link">
+                    <i class="menu-icon tf-icons mdi mdi-chart-line"></i>
+                    <div data-i18n="Front Pages">Moving Average</div>
+                </a>
+            @endauth
+        </li>
+
         <li class="menu-item {{ request()->routeIs('log.view') ? 'active' : '' }}">
             @auth
                 <a href="{{ route('log.view') }}" class="menu-link ">

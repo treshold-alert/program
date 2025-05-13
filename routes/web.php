@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/stock-out', [ProductController::class, 'stockOut'])->name('products.stock.out');
 
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.view');
+    Route::get('/average', [TransactionController::class, 'stockSummary'])->name('average.view');
+
 
     Route::get('/log', [LogController::class, 'showLog'])->name('log.view');
 });

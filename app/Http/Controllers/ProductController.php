@@ -34,12 +34,12 @@ class ProductController extends Controller
         // Update stok
         $product->update(['stock' => $request->stock]);
 
-        // Kirim WA jika stok sebelumnya > 9 dan sekarang <= 9
-        if ($product->stock <= 9) {
-            $message = "⚠️ *Stok Barang Hampir Habis!* ⚠️\n\nNama: *{$product->name}*\nSisa Stok: *{$product->stock} unit*\n\nSegera restock!";
+        // // Kirim WA jika stok sebelumnya > 9 dan sekarang <= 9
+        // if ($product->stock <= 9) {
+        //     $message = "⚠️ *Stok Barang Hampir Habis!* ⚠️\n\nNama: *{$product->name}*\nSisa Stok: *{$product->stock} unit*\n\nSegera restock!";
 
-            TwilioHelper::sendWhatsAppMessage(env('ADMIN_PHONE'), $message);
-        }
+        //     TwilioHelper::sendWhatsAppMessage(env('ADMIN_PHONE'), $message);
+        // }
 
         return redirect()->back()->with('success', 'Stok berhasil diperbarui.');
     }

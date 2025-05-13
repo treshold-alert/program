@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -13,40 +15,69 @@ class TransactionController extends Controller
         return view('admin.transaction', compact('transactions'));
     }
 
-    public function create()
+    public function stockSummary()
     {
-        // Logic to show the form for creating a new transaction
-        return view('transactions.create');
-    }
+        // Ambil data transaksi keluar per minggu per produk
+        $weeklyOutData = Transaction::select(
+            DB::raw('YEARWEEK(created_at) as week'),
+            'product_id',
+            DB::raw('SUM(quantity) as total_out')
+        )
+            ->where('type', 'keluar')
+            ->groupBy('week', 'product_id')
+            ->get()
+            ->groupBy('product_id');
 
-    public function store(Request $request)
-    {
-        // Logic to store a new transaction
-        // Validate and save the transaction data
-        return redirect()->route('transactions.index');
-    }
+        // dd($weeklyOutData);
+        $predictions = [];
 
-    public function show($id)
-    {
-        // Logic to display a specific transaction
-        return view('transactions.show', compact('id'));
-    }
+        foreach ($weeklyOutData as $productId => $weeks) {
+            $quantities = $weeks->pluck('total_out')->toArray();
 
-    public function edit($id)
-    {
-        // Logic to show the form for editing a specific transaction
-        return view('transactions.edit', compact('id'));
-    }
+            // Hitung moving average (pakai semua minggu yang tersedia)
+            if (count($quantities) >= 1) {
+                $movingAvg = round(array_sum($quantities) / count($quantities));
 
-    public function update(Request $request, $id)
-    {
-        // Logic to update a specific transaction
-        return redirect()->route('transactions.index');
-    }
+                $product = Product::find($productId);
+                $predictions[] = [
+                    'product_id' => $productId,
+                    'name' => $product->name,
+                    'predicted_stock' => $movingAvg,
+                    'total_keluar' => array_sum($quantities)
+                ];
+            }
+        }
 
-    public function destroy($id)
-    {
-        // Logic to delete a specific transaction
-        return redirect()->route('transactions.index');
+        // Ambil produk dengan jumlah keluar paling banyak
+        $topPrediction = collect($predictions)
+            ->sortByDesc('total_keluar')
+            ->first();
+
+        // Ambil data produk + perhitungan masuk dan keluar
+        $products = Product::all();
+
+        $report = $products->map(function ($product) {
+            $masuk = Transaction::where('product_id', $product->product_id)
+                ->where('type', 'masuk')
+                ->sum('quantity');
+
+            $keluar = Transaction::where('product_id', $product->product_id)
+                ->where('type', 'keluar')
+                ->sum('quantity');
+
+            return [
+                'code' => $product->code,
+                'name' => $product->name,
+                'masuk' => $masuk,
+                'keluar' => $keluar,
+                'stock' => $product->stock
+            ];
+        });
+
+        // dd($predictions);
+        // dd($weeklyOutData);
+
+
+        return view('admin.average', compact('topPrediction', 'report'));
     }
 }

@@ -16,6 +16,11 @@ class Product extends Model
 
     protected $fillable = ['name', 'code', 'image', 'stock'];
 
+    public function transactions()
+    {
+        return $this->hasMany(Product::class, 'product_id', 'product_id');
+    }
+
     protected static function boot()
     {
         parent::boot();
