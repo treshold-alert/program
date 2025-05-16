@@ -58,8 +58,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/log', [LogController::class, 'showLog'])->name('log.view');
 });
 
-Route::get('/page', function () {
-    return view('page');
-})->name('page');
+// Route::get('/page', function () {
+//     return view('page');
+// })->name('page');
 
 require __DIR__ . '/auth.php';

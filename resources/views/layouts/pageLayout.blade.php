@@ -9,8 +9,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="/page/img/favicon.png" rel="icon">
-    <link href="/page/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('page/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('page/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -20,14 +20,14 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="/page/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/page/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="/page/vendor/aos/aos.css" rel="stylesheet">
-    <link href="/page/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="/page/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="{{ asset('page/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('page/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('page/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('page/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('page/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
     <!-- Main CSS File -->
-    <link href="/page/css/main.css" rel="stylesheet">
+    <link href="{{ asset('page/css/main.css') }}" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: FlexStart
@@ -56,22 +56,22 @@
     </div>
 
     <!-- Vendor JS Files -->
-    <script src="/page/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/page/vendor/php-email-form/validate.js"></script>
-    <script src="/page/vendor/aos/aos.js"></script>
-    <script src="/page/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="/page/vendor/purecounter/purecounter_vanilla.js"></script>
-    <script src="/page/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="/page/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="/page/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="{{ asset('page/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('page/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('page/vendor/aos/aos.js') }}"></script>
+    <script src="{{ asset('page/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('page/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+    <script src="{{ asset('page/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('page/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('page/vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
 
 
     <!-- SweetAlert (jika pakai) -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Main JS File -->
-    <script src="/page/js/main.js"></script>
+    <script src="{{ asset('page/js/main.js') }}"></script>
 
     <script>
         function validateNumberInput(input) {
@@ -94,7 +94,8 @@
             Swal.fire({
                 position: 'center',
                 icon: 'success',
-                title: '{{ session('success',
+                title: '{{ session('
+                success ',
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -107,7 +108,8 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: '{{ session('error',
+                text: '{{ session('
+                error ',
             })
         </script>
     @endif
