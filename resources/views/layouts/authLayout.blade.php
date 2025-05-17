@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="en" class="light-style layout-wide customizer-hide" dir="ltr" data-theme="theme-default" data-template="vertical-menu-template-free">
+<html lang="en" class="light-style layout-wide customizer-hide" dir="ltr" data-theme="theme-default"
+    data-template="vertical-menu-template-free">
 
 <head>
     <meta charset="utf-8" />
@@ -89,14 +90,69 @@
         @endif
     </script>
     <script>
-        @if (session('status'))
+        @if (session('status') && session('show_verification_modal'))
             Swal.fire({
                 icon: 'success',
                 title: 'Berhasil',
                 text: "{{ session('status') }}",
                 timer: 1500,
+                showConfirmButton: true
+            }).then(() => {
+                // Setelah SweetAlert ditutup, tampilkan modal Bootstrap
+                var myModal = new bootstrap.Modal(document.getElementById('verificationModal'));
+                myModal.show();
             });
         @endif
+    </script>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="verificationModal" tabindex="-1" aria-labelledby="verifyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="verifyModalLabel">Verifikasi WhatsApp</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <p>
+                        Harap masukkan kode <strong>"join least-flower"</strong> pada nomor WhatsApp ini (+14155238886):
+                    </p>
+                    <p>
+                        <a href="https://wa.me/14155238886?text=join least-flower" target="_blank" class="btn btn-success">
+                            Klik di sini untuk kirim kode ke WhatsApp
+                        </a>
+                    </p>
+                    <div class="form-check d-flex justify-content-center mt-4">
+                        <input class="form-check-input me-2" type="checkbox" value="" id="agreeCheck">
+                        <label class="form-check-label" for="agreeCheck">
+                            Saya sudah mengirimkan kode verifikasi.
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" id="continueBtn" class="btn btn-primary" disabled>Lanjut</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script untuk aktifkan tombol & tampilkan modal -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const modal = new bootstrap.Modal(document.getElementById('verifyModal'));
+            modal.show();
+
+            const check = document.getElementById('agreeCheck');
+            const button = document.getElementById('continueBtn');
+
+            check.addEventListener('change', function() {
+                button.disabled = !this.checked;
+            });
+
+            button.addEventListener('click', function() {
+                window.location.href = "{{ route('dashboard') }}"; // Ganti ke route yang kamu inginkan
+            });
+        });
     </script>
 </body>
 

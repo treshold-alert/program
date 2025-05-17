@@ -58,6 +58,9 @@ class RegisteredUserController extends Controller
         // Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);
-        return redirect()->route('login')->with('status', 'Registrasi berhasil. Silakan login.');
+        return redirect()->route('login')->with([
+            'status' => 'Registrasi berhasil. Silakan login.',
+            'show_verification_modal' => true,
+        ]);
     }
 }

@@ -24,6 +24,13 @@
                             <label for="email">Email</label>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="form-floating form-floating-outline">
+                            <input class="form-control" type="text" name="phone_number" id="phone_number"
+                                value="{{ Auth::user()->phone_number }}"readonly />
+                            <label for="phone_number">Phone Number</label>
+                        </div>
+                    </div>
                 </div>
                 {{-- <div class="mt-4">
                     <button type="submit" class="btn btn-primary me-2">Save changes</button>
