@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.authLayout')
 
 @section('content')
     <div class="position-relative">
@@ -9,8 +9,8 @@
                 <div class="card p-2">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center mt-5">
-                        <a href="{{ route('page') }}" class="app-brand-link gap-2">
-                            <span class="app-brand-text demo text-heading fw-semibold">WAU</span>
+                        <a href="{{ route('home') }}" class="app-brand-link gap-2">
+                            <span class="app-brand-text demo text-heading fw-semibold">GOODS WAREHOUSE</span>
                         </a>
                     </div>
                     <!-- /Logo -->
@@ -18,7 +18,7 @@
                         <h4 class="mb-2">Adventure starts here 🚀</h4>
                         <p class="mb-4">Make your app management easy and fun!</p>
 
-                        <form id="formAuthentication" class="mb-3" action="{{ route('register') }}">
+                        <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
                             @csrf
                             <div class="form-floating form-floating-outline mb-3">
                                 <input type="text" class="form-control" id="username" name="username"

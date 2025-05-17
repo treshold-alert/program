@@ -186,6 +186,6 @@ class TransactionController extends Controller
             });
         }
 
-        return view('admin.average  ', compact('report', 'bulan'));
+        return view('admin.average', compact('report', 'bulan'));
     }
 }
