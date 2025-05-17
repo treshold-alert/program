@@ -19,6 +19,7 @@ class AuthSeeder extends Seeder
                 'user_id' => '3f5ef0bc-2c3f-4fa6-8e63-b329582d3cfd',
                 'username' => 'Pia',
                 'email' => 'pia@gmail.com',
+                'phone_number' => 6283853105535,
                 'password' => Hash::make('admin12345'),
                 'created_at' => now(),
                 'updated_at' => now(),

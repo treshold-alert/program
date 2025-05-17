@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('user_id')->primary();
             $table->string('username')->unique();
             $table->string('email')->unique();
+            $table->bigInteger('phone_number')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

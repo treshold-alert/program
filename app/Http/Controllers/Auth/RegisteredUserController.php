@@ -32,13 +32,24 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'username' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'phone_number' => [
+                'required',
+                'numeric',
+                'digits_between:10,15',
+                'unique:' . User::class,
+                'regex:/^628[0-9]{7,12}$/'
+            ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'phone_number.regex' => 'Nomor telepon harus diawali dengan 628, bukan 08.',
         ]);
+
 
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
+            'phone_number' => $request->phone_number,
             'password' => Hash::make($request->password),
         ]);
 
@@ -47,6 +58,6 @@ class RegisteredUserController extends Controller
         // Auth::login($user);
 
         // return redirect(RouteServiceProvider::HOME);
-         return redirect()->route('login')->with('status', 'Registrasi berhasil. Silakan login.');
+        return redirect()->route('login')->with('status', 'Registrasi berhasil. Silakan login.');
     }
 }

@@ -160,7 +160,7 @@ class ProductController extends Controller
         // Kirim notifikasi jika stok tinggal sedikit
         if ($product->stock <= 9) {
             $message = "⚠️ *Stok Barang Hampir Habis!* ⚠️\n\nNama: *{$product->name}*\nSisa Stok: *{$product->stock} unit*\n\nSegera restock!";
-            TwilioHelper::sendWhatsAppMessage(env('ADMIN_PHONE'), $message);
+            TwilioHelper::sendWhatsAppMessage('whatsapp:'.Auth::user()->phone_number, $message);
         }
 
         // Buat transaksi
