@@ -45,7 +45,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+                                        <h6 class="mb-0">{{ Auth::user()->username }}</h6>
                                         <small class="text-muted">Admin</small>
                                     </div>
                                 </div>
@@ -54,13 +54,13 @@
                         <li>
                             <div class="dropdown-divider my-1"></div>
                         </li>
-                        <li><a class="dropdown-item" href="#"><i class="mdi mdi-account-outline me-1 mdi-20px"></i>
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="mdi mdi-account-outline me-1 mdi-20px"></i>
                                 <span>My Profile</span></a></li>
-                        <li><a class="dropdown-item" href="#"><i class="mdi mdi-cog-outline me-1 mdi-20px"></i>
-                                <span>Settings</span></a></li>
-                        <li><a class="dropdown-item" href="#"><i
+                        {{-- <li><a class="dropdown-item" href="#"><i class="mdi mdi-cog-outline me-1 mdi-20px"></i>
+                                <span>Settings</span></a></li> --}}
+                        {{-- <li><a class="dropdown-item" href="#"><i
                                     class="mdi mdi-credit-card-outline me-1 mdi-20px"></i> <span>Cash Out</span></a></li>
-                        <li>
+                        <li> --}}
                             <div class="dropdown-divider my-1"></div>
                         </li>
                         <li>

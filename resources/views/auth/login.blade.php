@@ -49,7 +49,7 @@
                                 <span>Buat akun</span>
                             </a>
                             <br>
-                            <a href="{{ route('page') }}">
+                            <a href="{{ route('home') }}">
                                 <span>Kembali ke halaman utama</span>
                             </a>
                         </p>
