@@ -139,8 +139,7 @@
     <!-- Script untuk aktifkan tombol & tampilkan modal -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const modal = new bootstrap.Modal(document.getElementById('verifyModal'));
-            modal.show();
+            const modal = new bootstrap.Modal(document.getElementById('verificationModal'));
 
             const check = document.getElementById('agreeCheck');
             const button = document.getElementById('continueBtn');
@@ -150,7 +149,7 @@
             });
 
             button.addEventListener('click', function() {
-                window.location.href = "{{ route('dashboard') }}"; // Ganti ke route yang kamu inginkan
+                window.location.href = "{{ route('login') }}"; // Ganti ke route yang kamu inginkan
             });
         });
     </script>
