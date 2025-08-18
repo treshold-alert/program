@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="{{ route('home') }}" class="app-brand-link">
-            <span class="app-brand-text demo menu-text fw-semibold ms-2">Goods Warehouse</span>
+            <span class="app-brand-text demo menu-text fw-semibold ms-2">DIMSUM BANDUNG</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -17,7 +17,7 @@
             @auth
                 <a href="{{ route('dashboard') }}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-home-outline"></i>
-                    <div data-i18n="Dashboards">Dashboards</div>
+                    <div data-i18n="Dashboards">Dashboard</div>
                 </a>
             @else
                 <a href="{{ route('login') }}" class="menu-link">
@@ -31,7 +31,7 @@
         <li class="menu-item {{ request()->routeIs('products.view') ? 'active' : '' }}">
             <a href="{{ route('products.view') }}" class="menu-link ">
                 <i class="menu-icon tf-icons mdi mdi-cube-outline"></i>
-                <div data-i18n="Layouts">Products</div>
+                <div data-i18n="Layouts">Produk</div>
             </a>
         </li>
 
@@ -39,7 +39,7 @@
         <li class="menu-item {{ request()->routeIs('home') ? 'active' : '' }}">
             <a href="{{ route('home') }}" class="menu-link ">
                 <i class="menu-icon tf-icons mdi mdi-flip-to-front"></i>
-                <div data-i18n="Layouts">Home</div>
+                <div data-i18n="Layouts">Halaman Awal</div>
             </a>
         </li>
 
@@ -47,7 +47,7 @@
             @auth
                 <a href="{{ route('transactions.view') }}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-credit-card-outline"></i>
-                    <div data-i18n="Front Pages">Transactions</div>
+                    <div data-i18n="Front Pages">Transaksi</div>
                 </a>
             @else
                 <a href="{{ route('login') }}" class="menu-link">
@@ -61,7 +61,7 @@
             @auth
                 <a href="{{ route('average.view') }}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-chart-line"></i>
-                    <div data-i18n="Front Pages">Moving Average</div>
+                    <div data-i18n="Front Pages">Laporan</div>
                 </a>
             @else
                 <a href="{{ route('login') }}" class="menu-link">
@@ -75,7 +75,7 @@
             @auth
                 <a href="{{ route('log.view') }}" class="menu-link ">
                     <i class="menu-icon tf-icons mdi mdi-folder-outline"></i>
-                    <div data-i18n="Layouts">Logs</div>
+                    <div data-i18n="Layouts">Riwayat</div>
                 </a>
             @else
                 <a href="{{ route('login') }}" class="menu-link ">

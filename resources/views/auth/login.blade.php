@@ -9,7 +9,7 @@
                     <!-- Logo -->
                     <div class="app-brand justify-content-center mt-5">
                         <a href="index.html" class="app-brand-link gap-2">
-                            <span class="app-brand-text demo text-heading fw-semibold">Goods Warehouse</span>
+                            <span class="app-brand-text demo text-heading fw-semibold">PABRIK DIMSUM BANDUNG</span>
                         </a>
                     </div>
                     <!-- /Logo -->
@@ -40,22 +40,22 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100">Sign in</button>
+                                <button class="btn btn-danger d-grid w-100">Sign in</button>
                             </div>
                         </form>
                         <p class="text-center">
                             <span>Belum punya akun?</span>
-                            <a href="{{ route('register') }}">
+                            <a href="{{ route('register') }}" class="text-danger text-decoration-none">
                                 <span>Buat akun</span>
                             </a>
                             <br>
-                            <a href="{{ route('home') }}">
+                            <a href="{{ route('home') }}" class="text-danger ">
                                 <span>Kembali ke halaman utama</span>
                             </a>
                         </p>
                     </div>
                 </div>
-                <!-- /Login -->
+                {{-- <!-- /Login -->
                 <img src="{{ asset('assets/img/illustrations/tree-3.png') }}" alt="auth-tree"
                     class="authentication-image-object-left d-none d-lg-block" />
                 <img src="{{ asset('assets/img/illustrations/auth-basic-mask-light.png') }}"
@@ -63,7 +63,7 @@
                     data-app-light-img="illustrations/auth-basic-mask-light.png"
                     data-app-dark-img="illustrations/auth-basic-mask-dark.png" />
                 <img src="{{ asset('assets/img/illustrations/tree.png') }}" alt="auth-tree"
-                    class="authentication-image-object-right d-none d-lg-block" />
+                    class="authentication-image-object-right d-none d-lg-block" /> --}}
             </div>
         </div>
     </div>

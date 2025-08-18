@@ -7563,8 +7563,8 @@ label.btn {
 
 .btn-danger {
   color: #fff;
-  background-color: #ff4c51;
-  border-color: #ff4c51;
+  background-color: #D30000;
+  border-color: #D30000;
 }
 .btn-danger:hover {
   color: #fff !important;
@@ -8708,7 +8708,7 @@ div:not(.nav-align-left):not(.nav-align-right) > .nav-tabs {
   padding: calc(0.5rem - 1px) calc(0.875rem - 1px);
 }
 .form-control:hover:not([disabled]):not([focus]) {
-  border-color: #b4b2b7;
+  border-color: #D30000;
 }
 .form-control:focus {
   border-width: 2px;
@@ -8876,7 +8876,7 @@ div:not(.nav-align-left):not(.nav-align-right) > .nav-tabs {
 }
 .input-group:hover .input-group-text,
 .input-group:hover .form-control {
-  border-color: #b4b2b7;
+  border-color: #D30000;
 }
 .input-group:focus-within {
   box-shadow: none;

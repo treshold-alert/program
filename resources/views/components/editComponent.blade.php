@@ -4,7 +4,7 @@
             @csrf
             @method('PUT')
             <div class="modal-header">
-                <h4 class="modal-title">Edit Product</h4>
+                <h4 class="modal-title">Ubah Produk</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -19,14 +19,14 @@
                         <div class="form-floating">
                             <input type="text" id="editName" class="form-control" placeholder="Product Name"
                                 name="name" />
-                            <label for="editName">Product Name</label>
+                            <label for="editName">Nama Produk</label>
                         </div>
                     </div>
                     <div class="col mb-3">
                         <div class="form-floating">
                             <input type="text" id="editCode" class="form-control" placeholder="Code"
                                 name="code" disabled/>
-                            <label for="editCode">Code</label>
+                            <label for="editCode">Kode</label>
                         </div>
                     </div>
                 </div>
@@ -34,14 +34,14 @@
                     <div class="col mb-3">
                         <div class="form-floating">
                             <input class="form-control" type="file" id="editPhoto" name="image" />
-                            <label for="editPhoto">Product Image</label>
+                            <label for="editPhoto">Foto Produk</label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Update Product</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary">Ubah Produk</button>
             </div>
         </form>
     </div>

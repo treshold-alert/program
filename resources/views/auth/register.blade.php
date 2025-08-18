@@ -10,13 +10,13 @@
                     <!-- Logo -->
                     <div class="app-brand justify-content-center mt-5">
                         <a href="{{ route('home') }}" class="app-brand-link gap-2">
-                            <span class="app-brand-text demo text-heading fw-semibold">GOODS WAREHOUSE</span>
+                            <span class="app-brand-text demo text-heading fw-semibold">PABRIK DIMSUM BANDUNG</span>
                         </a>
                     </div>
                     <!-- /Logo -->
                     <div class="card-body mt-2">
-                        <h4 class="mb-2">Adventure starts here 🚀</h4>
-                        <p class="mb-4">Make your app management easy and fun!</p>
+                        <h4 class="mb-2">Petualangan Dimulai Disini 🚀</h4>
+                        <p class="mb-4">Buat Aplikasi Managementmu Menyenangkan</p>
 
                         <form id="formAuthentication" class="mb-3" action="{{ route('register') }}" method="POST">
                             @csrf
@@ -81,19 +81,19 @@
                             </div>
 
                             {{-- Tombol submit --}}
-                            <button class="btn btn-primary d-grid w-100">Sign up</button>
+                            <button class="btn btn-danger d-grid w-100">Sign up</button>
                         </form>
 
 
                         <p class="text-center">
                             <span>Sudah punya akun?</span>
-                            <a href="{{ route('login') }}">
+                            <a href="{{ route('login') }}" class="text-danger">
                                 <span>Login</span>
                             </a>
                         </p>
                     </div>
                 </div>
-                <!-- Register Card -->
+                {{-- <!-- Register Card -->
                 <img src="{{ asset('assets/img/illustrations/tree-3.png') }}" alt="auth-tree"
                     class="authentication-image-object-left d-none d-lg-block" />
                 <img src="{{ asset('assets/img/illustrations/auth-basic-mask-light.png') }}"
@@ -101,7 +101,7 @@
                     data-app-light-img="illustrations/auth-basic-mask-light.png"
                     data-app-dark-img="illustrations/auth-basic-mask-dark.png" />
                 <img src="{{ asset('assets/img/illustrations/tree.png') }}" alt="auth-tree"
-                    class="authentication-image-object-right d-none d-lg-block" />
+                    class="authentication-image-object-right d-none d-lg-block" /> --}}
             </div>
         </div>
     </div>

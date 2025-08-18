@@ -50,7 +50,7 @@
 
     {{-- Tombol Tampilkan --}}
     <div class="col-12 col-sm-auto d-flex align-items-end">
-        <button type="submit" class="btn btn-primary w-100">Tampilkan</button>
+        <button type="submit" class="btn btn-danger w-100">Tampilkan</button>
     </div>
 
     {{-- Tombol Cetak PDF --}}

@@ -1,12 +1,12 @@
 <div class="col-md-12">
     <ul class="nav nav-pills flex-column flex-md-row mb-4 gap-2 gap-lg-0">
         <li class="nav-item">
-            <a class="nav-link active" href="javascript:void(0);"><i
+            <a class="btn btn-danger" href="javascript:void(0);"><i
                     class="mdi mdi-account-outline mdi-20px me-1"></i>Account</a>
         </li>
     </ul>
     <div class="card mb-1">
-        <h4 class="card-header">Profile Details</h4>
+        <h4 class="card-header">Detail Profil</h4>
         <div class="card-body">
             <form id="formAccountSettings" method="POST" onsubmit="return false">
                 <div class="row gy-4">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                    <button type="submit" class="btn btn-danger me-2">Save changes</button>
                 </div>
             </form>
 

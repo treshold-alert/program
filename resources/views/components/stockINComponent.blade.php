@@ -3,7 +3,7 @@
         <form id="stockProductForm" method="POST" action="{{ route('products.stock-in') }}" class="modal-content">
             @csrf
             <div class="modal-header">
-                <h5 class="modal-title">Stock IN</h5>
+                <h5 class="modal-title">Stok Masuk</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -18,7 +18,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-success">Tambah Stok</button>
+                <button type="submit" class="btn btn-danger">Tambah Stok</button>
             </div>
         </form>
     </div>

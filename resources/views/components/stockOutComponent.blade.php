@@ -6,7 +6,7 @@
             <input type="hidden" name="product_id" id="stockOutProductId">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Stock OUT</h5>
+                    <h5 class="modal-title">Kurangi Stok</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
