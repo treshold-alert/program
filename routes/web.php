@@ -27,7 +27,7 @@ use App\Models\Product;
 // Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 
 Route::get('/', function () {
-    $products = Product::all();
+    $products = Product::orderBy('code', 'asc')->get();
     return view('welcome', compact('products'));
 })->name('home');
 

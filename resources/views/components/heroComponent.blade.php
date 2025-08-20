@@ -6,7 +6,7 @@
             @foreach ($products as $product)
                 <div class="col-md-2 mb-3">
                     <div class="card h-100">
-                        <div class="card-body">
+                        <div class="card-body h-25">
                             <h5 class="card-title">{{ $product->name }}</h5>
                         </div>
                         <div style="height: 180px; overflow: hidden;">
