@@ -55,6 +55,9 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/log', [LogController::class, 'showLog'])->name('log.view');
+
+    Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+    Route::get('/logs/search', [LogController::class, 'search'])->name('logs.search');
 });
 
 // Route::get('/page', function () {

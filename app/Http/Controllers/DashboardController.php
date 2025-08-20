@@ -22,7 +22,9 @@ class DashboardController extends Controller
         $transactions = Transaction::all();
         $totalTransactions = $transactions->count();
 
-        return view('admin.dashboard');
+        dd($totalProducts, $totalUsers, $totalTransactions);
+
+        return view('admin.dashboard', compact('totalProducts', 'totalUsers',));
     }
 
     public function chartPengeluaranSemua()
@@ -67,6 +69,12 @@ class DashboardController extends Controller
             ];
         }
 
-        return view('admin.dashboard', compact('labels', 'series'));
+        $products = Product::all();
+        $totalProducts = $products->count();
+
+        $users = User::all();
+        $totalUsers = $users->count();
+
+        return view('admin.dashboard', compact('labels', 'series', 'totalUsers', 'totalProducts'));
     }
 }

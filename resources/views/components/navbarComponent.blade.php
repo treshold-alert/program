@@ -8,14 +8,20 @@
 
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <!-- Search -->
-        <div class="navbar-nav align-items-center">
-            <div class="nav-item d-flex align-items-center">
-                <i class="mdi mdi-magnify mdi-24px lh-0"></i>
-                <input type="text" class="form-control border-0 shadow-none bg-body" placeholder="Search..."
-                    aria-label="Search..." />
+        @if (Route::is('products.view'))
+            <div class="navbar-nav align-items-center">
+                <div class="nav-item d-flex align-items-center">
+                    <i class="mdi mdi-magnify mdi-24px lh-0"></i>
+                    <form method="GET" action="{{ url()->current() }}" class="d-flex">
+                        <input type="text" name="search" value="{{ request('search') }}"
+                            class="form-control border-0 shadow-none bg-body" placeholder="Search..."
+                            aria-label="Search..." />
+                    </form>
+                </div>
             </div>
-        </div>
+        @endif
         <!-- /Search -->
+
 
         @auth
             <ul class="navbar-nav flex-row align-items-center ms-auto">
@@ -54,23 +60,24 @@
                         <li>
                             <div class="dropdown-divider my-1"></div>
                         </li>
-                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="mdi mdi-account-outline me-1 mdi-20px"></i>
+                        <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
+                                    class="mdi mdi-account-outline me-1 mdi-20px"></i>
                                 <span>My Profile</span></a></li>
                         {{-- <li><a class="dropdown-item" href="#"><i class="mdi mdi-cog-outline me-1 mdi-20px"></i>
                                 <span>Settings</span></a></li> --}}
                         {{-- <li><a class="dropdown-item" href="#"><i
                                     class="mdi mdi-credit-card-outline me-1 mdi-20px"></i> <span>Cash Out</span></a></li>
                         <li> --}}
-                            <div class="dropdown-divider my-1"></div>
-                        </li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button class="dropdown-item"><i class="mdi mdi-power me-1 mdi-20px"></i> Log Out</button>
-                            </form>
-                        </li>
-                    </ul>
+                        <div class="dropdown-divider my-1"></div>
                 </li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="dropdown-item"><i class="mdi mdi-power me-1 mdi-20px"></i> Log Out</button>
+                    </form>
+                </li>
+            </ul>
+            </li>
             </ul>
         @else
             {{-- Jika belum login --}}

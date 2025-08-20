@@ -46,9 +46,10 @@ class ProductController extends Controller
 
     public function viewProduct()
     {
-        $products = Product::all();
+        $products = Product::orderBy('code', 'asc')->get(); 
+        // $products = Product::orderBy('code', 'desc')->get();
+
         return view('admin.product', compact('products'));
-        // return view('admin.product');
     }
 
     public function addProduct(Request $request)
@@ -160,7 +161,7 @@ class ProductController extends Controller
         // Kirim notifikasi jika stok tinggal sedikit
         if ($product->stock <= 9) {
             $message = "⚠️ *Stok Barang Hampir Habis!* ⚠️\n\nNama: *{$product->name}*\nSisa Stok: *{$product->stock} unit*\n\nSegera restock!";
-            TwilioHelper::sendWhatsAppMessage('whatsapp:'.Auth::user()->phone_number, $message);
+            TwilioHelper::sendWhatsAppMessage('whatsapp:' . Auth::user()->phone_number, $message);
         }
 
         // Buat transaksi
@@ -181,5 +182,19 @@ class ProductController extends Controller
 
         // ⬅️ Return di akhir setelah semua proses selesai
         return redirect()->back()->with('success', 'Stok berhasil dikurangi.');
+    }
+
+    public function search(Request $request)
+    {
+        $query = Product::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('code', 'like', '%' . $request->search . '%');
+        }
+
+        $products = $query->get();
+
+        return view('components.partialsTable', compact('products'));
     }
 }

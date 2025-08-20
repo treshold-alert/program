@@ -317,6 +317,45 @@
         });
     </script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('input[name="search"]').on('keyup', function() {
+                let search = $(this).val();
+
+                $.ajax({
+                    url: "{{ route('products.search') }}",
+                    type: 'GET',
+                    data: {
+                        search: search
+                    },
+                    success: function(data) {
+                        $('#product-table-body').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('input[name="search"]').on('keyup', function() {
+                let search = $(this).val();
+
+                $.ajax({
+                    url: "{{ route('logs.search') }}",
+                    type: 'GET',
+                    data: {
+                        search: search
+                    },
+                    success: function(data) {
+                        $('#log-table-body').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+
 
 </body>
 

@@ -43,7 +43,7 @@
             </a>
         </li>
 
-        <li class="menu-item {{ request()->routeIs('transactions.view') ? 'active' : '' }}">
+        {{-- <li class="menu-item {{ request()->routeIs('transactions.view') ? 'active' : '' }}">
             @auth
                 <a href="{{ route('transactions.view') }}" class="menu-link">
                     <i class="menu-icon tf-icons mdi mdi-credit-card-outline"></i>
@@ -55,7 +55,7 @@
                     <div data-i18n="Front Pages">Transactions</div>
                 </a>
             @endauth
-        </li>
+        </li> --}}
 
         <li class="menu-item {{ request()->routeIs('average.view') ? 'active' : '' }}">
             @auth
@@ -75,7 +75,7 @@
             @auth
                 <a href="{{ route('log.view') }}" class="menu-link ">
                     <i class="menu-icon tf-icons mdi mdi-folder-outline"></i>
-                    <div data-i18n="Layouts">Riwayat</div>
+                    <div data-i18n="Layouts">Riwayat Aktifitas</div>
                 </a>
             @else
                 <a href="{{ route('login') }}" class="menu-link ">

@@ -12,26 +12,13 @@
               <div class="col-md-3 col-6">
                   <div class="d-flex align-items-center">
                       <div class="avatar">
-                          <div class="avatar-initial bg-primary rounded shadow">
-                              <i class="mdi mdi-trending-up mdi-24px"></i>
-                          </div>
-                      </div>
-                      <div class="ms-3">
-                          <div class="small mb-1">Sales</div>
-                          <h5 class="mb-0">245k</h5>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6">
-                  <div class="d-flex align-items-center">
-                      <div class="avatar">
                           <div class="avatar-initial bg-success rounded shadow">
                               <i class="mdi mdi-account-outline mdi-24px"></i>
                           </div>
                       </div>
                       <div class="ms-3">
-                          <div class="small mb-1">Customers</div>
-                          <h5 class="mb-0">12.5k</h5>
+                          <div class="small mb-1">Admin</div>
+                          <h5 class="mb-0">{{ $totalUsers }}</h5>
                       </div>
                   </div>
               </div>
@@ -44,20 +31,7 @@
                       </div>
                       <div class="ms-3">
                           <div class="small mb-1">Product</div>
-                          <h5 class="mb-0">1.54k</h5>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-md-3 col-6">
-                  <div class="d-flex align-items-center">
-                      <div class="avatar">
-                          <div class="avatar-initial bg-info rounded shadow">
-                              <i class="mdi mdi-currency-usd mdi-24px"></i>
-                          </div>
-                      </div>
-                      <div class="ms-3">
-                          <div class="small mb-1">Revenue</div>
-                          <h5 class="mb-0">$88k</h5>
+                          <h5 class="mb-0">{{ $totalProducts }}</h5>
                       </div>
                   </div>
               </div>
