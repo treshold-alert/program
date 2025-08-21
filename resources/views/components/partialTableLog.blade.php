@@ -1,3 +1,7 @@
+ @php
+     use Carbon\Carbon;
+     \Carbon\Carbon::setLocale('id');
+ @endphp
  @forelse ($logs as $log)
      <tr>
          <td>{{ $loop->iteration }}</td>
@@ -5,7 +9,7 @@
          <td>{{ $log->user->email ?? 'Tidak diketahui' }}</td>
          <td>{{ ucfirst($log->action) }}</td>
          <td>{{ $log->details }}</td>
-         <td>{{ $log->created_at->format('d M Y H:i') }}</td>
+         <td>{{ Carbon::parse($log->created_at)->translatedFormat('d F Y H:i') }}</td>
      </tr>
  @empty
      <tr>

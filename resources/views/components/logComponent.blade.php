@@ -5,10 +5,10 @@
             <thead>
                 <tr class="text-nowrap">
                     <th>No</th>
-                    <th>User</th>
+                    <th>Pengguna</th>
                     <th>Email</th>
-                    <th>Action</th>
-                    <th>Details</th>
+                    <th>Aksi</th>
+                    <th>Detail</th>
                     <th>Waktu</th>
                 </tr>
             </thead>

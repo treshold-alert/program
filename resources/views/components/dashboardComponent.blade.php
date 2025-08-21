@@ -3,7 +3,7 @@
   <div class="card">
       <div class="card-header">
           <div class="d-flex align-items-center justify-content-between">
-              <h5 class="card-title m-0 me-2">Transactions</h5>
+              <h5 class="card-title m-0 me-2">Data</h5>
           </div>
           {{-- <p class="mt-3"><span class="fw-medium">Total 48.5% growth</span> 😎 this month</p> --}}
       </div>
@@ -30,7 +30,7 @@
                           </div>
                       </div>
                       <div class="ms-3">
-                          <div class="small mb-1">Product</div>
+                          <div class="small mb-1">Produk</div>
                           <h5 class="mb-0">{{ $totalProducts }}</h5>
                       </div>
                   </div>
@@ -45,7 +45,7 @@
   <div class="card">
       <div class="card-header">
           <div class="d-flex justify-content-between">
-              <h5 class="mb-1">Weekly Overview</h5>
+              <h5 class="mb-1">Ringkasan Mingguan</h5>
           </div>
       </div>
       <div class="card-body">

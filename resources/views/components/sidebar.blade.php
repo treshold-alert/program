@@ -1,7 +1,7 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="{{ route('home') }}" class="app-brand-link">
-            <span class="app-brand-text demo menu-text fw-semibold ms-2">DIMSUM BANDUNG</span>
+            <span class="app-brand-text demo menu-text fw-semibold">PABRIK DIMSUM BANDUNG</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -92,7 +92,7 @@
                     <button type="submit" class="menu-link border-transparent bg-transparent">
                         <!-- Unique Logout Icon -->
                         <i class="menu-icon tf-icons mdi mdi-logout"></i>
-                        <div data-i18n="Front Pages">Logout</div>
+                        <div data-i18n="Front Pages">Keluar</div>
                     </button>
                 </form>
 

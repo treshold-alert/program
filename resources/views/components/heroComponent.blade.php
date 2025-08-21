@@ -20,11 +20,11 @@
                                 <a href="javascript:void(0);" class="btn dropdown-item stock-out-product text-danger"
                                     data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
                                     data-code="{{ $product->code }}" data-image="{{ $product->image }}">
-                                    <i class="mdi mdi-tray-arrow-up me-1"></i> STOCK OUT
+                                    <i class="mdi mdi-tray-arrow-up me-1"></i> STOCK KELUAR
                                 </a>
                             @else
                                 <a href="{{ route('login') }}" class="btn p-0 hide-arrow text-danger">
-                                    STOCK OUT
+                                    STOCK KELUAR
                                 </a>
                             @endauth
                         </div>

@@ -29,21 +29,21 @@
                         <a href="javascript:void(0);" class="dropdown-item edit-product"
                             data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
                             data-code="{{ $product->code }}" data-image="{{ $product->image }}">
-                            <i class="mdi mdi-pencil-outline me-1"></i> Edit
+                            <i class="mdi mdi-pencil-outline me-1"></i> Ubah
                         </a>
                         <a href="javascript:void(0);" class="dropdown-item delete-product"
                             data-id="{{ $product->product_id }}" data-name="{{ $product->name }}">
-                            <i class="mdi mdi-delete-outline me-1"></i> Delete
+                            <i class="mdi mdi-delete-outline me-1"></i> Hapus
                         </a>
                         <a href="javascript:void(0);" class="dropdown-item stock-product"
                             data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
                             data-code="{{ $product->code }}" data-image="{{ $product->image }}">
-                            <i class="mdi mdi-tray-arrow-down me-1"></i> Stock IN
+                            <i class="mdi mdi-tray-arrow-down me-1"></i> Stok Masuk
                         </a>
                         <a href="javascript:void(0);" class="dropdown-item stock-out-product"
                             data-id="{{ $product->product_id }}" data-name="{{ $product->name }}"
                             data-code="{{ $product->code }}" data-image="{{ $product->image }}">
-                            <i class="mdi mdi-tray-arrow-up me-1"></i> Stock OUT
+                            <i class="mdi mdi-tray-arrow-up me-1"></i> Stok Keluar
                         </a>
                     </div>
                 </div>

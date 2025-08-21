@@ -26,12 +26,12 @@
         @auth
             <ul class="navbar-nav flex-row align-items-center ms-auto">
                 {{-- Bagian navbar user yang sudah login --}}
-                <li class="nav-item lh-1 me-3">
+                {{-- <li class="nav-item lh-1 me-3">
                     <a class="github-button"
                         href="https://github.com/themeselection/materio-bootstrap-html-admin-template-free"
                         data-icon="octicon-star" data-size="large" data-show-count="true"
                         aria-label="Star themeselection/materio-bootstrap-html-admin-template-free on GitHub">Star</a>
-                </li>
+                </li> --}}
 
                 {{-- Dropdown User --}}
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -62,7 +62,7 @@
                         </li>
                         <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i
                                     class="mdi mdi-account-outline me-1 mdi-20px"></i>
-                                <span>My Profile</span></a></li>
+                                <span>Profil Saya</span></a></li>
                         {{-- <li><a class="dropdown-item" href="#"><i class="mdi mdi-cog-outline me-1 mdi-20px"></i>
                                 <span>Settings</span></a></li> --}}
                         {{-- <li><a class="dropdown-item" href="#"><i
@@ -73,7 +73,7 @@
                 <li>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button class="dropdown-item"><i class="mdi mdi-power me-1 mdi-20px"></i> Log Out</button>
+                        <button class="dropdown-item"><i class="mdi mdi-power me-1 mdi-20px"></i> Keluar</button>
                     </form>
                 </li>
             </ul>
