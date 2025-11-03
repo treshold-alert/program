@@ -46,7 +46,7 @@ class ProductController extends Controller
 
     public function viewProduct()
     {
-        $products = Product::orderBy('code', 'asc')->get(); 
+        $products = Product::orderBy('code', 'asc')->get();
         // $products = Product::orderBy('code', 'desc')->get();
 
         return view('admin.product', compact('products'));
@@ -196,5 +196,16 @@ class ProductController extends Controller
         $products = $query->get();
 
         return view('components.partialsTable', compact('products'));
+    }
+
+    public function viewDeliveredGoods()
+    {
+        // Ambil transaksi yang bertipe 'keluar' (barang dikirim)
+        $deliveredGoodses = Transaction::with('product')
+            ->where('type', 'keluar')
+            ->orderByDesc('created_at')
+            ->get();
+
+        return view('admin.deliveredGoods', compact('deliveredGoodses'));
     }
 }

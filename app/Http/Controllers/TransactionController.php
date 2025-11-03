@@ -188,4 +188,70 @@ class TransactionController extends Controller
 
         return view('admin.average', compact('report', 'bulan'));
     }
+
+    public function reportFactory(Request $request)
+    {
+        $bulan = $request->bulan;
+        $report = collect();
+        $predictions = collect();
+        $topPrediction = null;
+
+        if ($bulan) {
+            $start = Carbon::parse($bulan)->startOfMonth();
+            $end = Carbon::parse($bulan)->endOfMonth();
+
+            // Moving average prediksi mingguan tapi dibatasi bulan
+            $weeklyOutData = Transaction::select(
+                DB::raw('YEARWEEK(created_at) as week'),
+                'product_id',
+                DB::raw('SUM(quantity) as total_out')
+            )
+                ->where('type', 'keluar')
+                ->whereBetween('created_at', [$start, $end])
+                ->groupBy('week', 'product_id')
+                ->get()
+                ->groupBy('product_id');
+
+            foreach ($weeklyOutData as $productId => $weeks) {
+                $quantities = $weeks->pluck('total_out')->toArray();
+
+                if (count($quantities) >= 1) {
+                    $movingAvg = round(array_sum($quantities) / count($quantities));
+                    $product = Product::find($productId);
+                    $predictions->push([
+                        'product_id' => $productId,
+                        'name' => $product->name,
+                        'predicted_stock' => $movingAvg,
+                        'total_keluar' => array_sum($quantities)
+                    ]);
+                }
+            }
+
+            $topPrediction = $predictions->sortByDesc('total_keluar')->first();
+
+            $products = Product::all();
+
+            $report = $products->map(function ($product) use ($start, $end) {
+                $masuk = Transaction::where('product_id', $product->product_id)
+                    ->where('type', 'masuk')
+                    ->whereBetween('created_at', [$start, $end])
+                    ->sum('quantity');
+
+                $keluar = Transaction::where('product_id', $product->product_id)
+                    ->where('type', 'keluar')
+                    ->whereBetween('created_at', [$start, $end])
+                    ->sum('quantity');
+
+                return [
+                    'code' => $product->code,
+                    'name' => $product->name,
+                    'masuk' => $masuk,
+                    'keluar' => $keluar,
+                    'stock' => $product->stock
+                ];
+            });
+        }
+
+        return view('reportFactory', compact('report', 'topPrediction', 'bulan'));
+    }
 }

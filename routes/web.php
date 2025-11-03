@@ -58,6 +58,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
     Route::get('/logs/search', [LogController::class, 'search'])->name('logs.search');
+
+    Route::get('/delivered-goods', [ProductController::class, 'viewDeliveredGoods'])->name('products.deliveredGoods');
+
+
+    Route::get('/report-factory', [TransactionController::class, 'reportFactory'])->name('products.reportedFactory');
+
+
 });
 
 // Route::get('/page', function () {
